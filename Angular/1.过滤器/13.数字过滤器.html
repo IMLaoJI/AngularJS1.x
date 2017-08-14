@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+  Number
+  将数组格式化为一种可读性强的格式，对于整数部分，每三位加一个逗号  对小数截取
+  参数是小数位数的截取长度，截取的最后一位做四舍五入
+
+
+-->
+
+
+<div ng-controller="myCtrl">
+        <h1>{{num | number}}</h1>
+        <h1>{{num | number : 6}}</h1>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+
+        $scope.num=123456.141592657
+
+    });
+
+
+</script>
+</body>
+</html>

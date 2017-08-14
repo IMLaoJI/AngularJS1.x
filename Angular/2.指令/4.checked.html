@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+
+    ng-checked 表示是否被选中
+
+    true表示被选中
+
+    false表示没有被选中
+
+    ng-model绑定的数据值只能是布尔值，设置value或true-value是没用的
+
+-->
+
+<div ng-controller="myCtrl">
+
+    <form action="" name="myForm">
+        <label >
+            44<input type="checkbox"  ng-checked="isChecked">
+        </label>
+        <button ng-click="toggle()">选择</button>
+    </form>
+
+</div>
+
+
+
+
+
+<script src="../lib/angular.js"></script>
+
+
+<script>
+
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',function($scope){
+        $scope.isChecked=true;
+        $scope.toggle=function(){
+            this.isChecked=!this.isChecked;
+            console.log(this);
+            console.log($scope);
+        }
+
+    })
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

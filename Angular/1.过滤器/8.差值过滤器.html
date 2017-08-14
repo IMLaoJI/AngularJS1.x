@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    对象转化为json字符串
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <div>{{obj | json}}</div>
+    <div>{{price | currency}}</div>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+       $scope.obj={
+           red:'红色',
+           green:"绿色",
+           blue:[0,0,255]
+       };
+       $scope.price=19.9;
+    });
+
+
+</script>
+</body>
+</html>

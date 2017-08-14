@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+我们页面中的变量往往不仅仅一两个，可能会很多，所以定义在
+ng-init不方便管理，可读性差
+因此我们就要在js中定义这些变量
+要为应用程序定义这些变量，我们要做的第一件是就是获取这个应用程序
+
+Angular.module可以获取我们的应用程序
+通常它有两个参数
+    参数1：表示应用程序的名称(ng-app指令的值)
+    参数2：表示应用程序的依赖集合(服务),是一个数组
+    如果没有依赖项传递一个空数组
+
+在js中定义这些变量
+    1.获取这个应用程序
+    2.创建一个作用域，在作用域中定义这些变量
+    创建作用域用ng-controller指令，创建一个作用域
+
+拿到控制器用controller()方法，通过这个方法我们可以将页面
+中的控制器，拿到js中.
+
+controller()方法有两个参数
+    参数1:表示控制器的名称
+    参数2:表示控制器处理函数，通过，我们在这个函数中
+    定义作用域中的变量
+
+    console.log(this);
+    作用域是一个空对象，通过它我们什么也做不了
+    console.log(arguments);
+    它的参数是一个空数组，什么都没有，我们什么也做不了
+
+    那么我们想定义变量就需要获取作用域,但是目前通过this,
+    arguments都获取不到，
+    angular提供了一个技术叫参数注入，我们想用什么功能
+    直接参数传递
+
+    我们想使用作用域，可以直接在参数中传递进来，
+    angular作用域相当于一个内置的服务，angular内置
+    服务有个特点，都以$开头的
+
+    作用域服务名称叫$scope
+    作用域中定义变量使用$scope.
+
+
+    为什么js中定义个变量就是window的属性，因为它定义在
+    了window的作用域中
+
+
+
+
+-->
+
+<div ng-controller="myCtrl">
+
+<h1>{{name}} <span>{{age}}</span> </h1>
+
+
+</div>
+
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    //console.log(angular);
+
+
+    var app=angular.module('myApp',[]);
+    app.controller('myCtrl',function($scope){
+        //console.log(this);
+        //console.log(arguments);
+        console.log($scope);
+        $scope.name='Mark';
+        $scope.age=100;
+    });
+
+</script>
+
+
+</body>
+</html>

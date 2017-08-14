@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+compile
+    表示指令的编译的全过程
+        特征：
+            1.页面中有几个自定义指令就会调用几次，根link一样
+            2.参数有两个(默认情况)
+                参数1：jQlite对象
+                参数2：attrs对象
+            3.作用域就是自定义指令对象(可以通过this访问自定义指令作用域中的方法和属性)
+            4.它的返回值就是link方法，它的使用方法和link方法是一致点的
+            5.在该方法中(返回函数的前面)，我们是无法使用作用域的
+            也就是说自定义指令的作用域是在Link方法执行之前创建的
+
+            6.link方法和compile方法都是在每次创建自定义指令的时候调用的方法
+            但是compile方法，无论页面中有多少个自定义指令元素
+            那么它一定是在link方法执行之前执行
+
+
+
+
+
+-->
+
+<div ng-controller="main">
+
+    <input type="text" ng-model="msg">
+    <!-- 实现ng-show指令的功能 -->
+    <h1 ickt-show="msg">查看p元素是否显隐</h1>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]).controller('main',function($scope){
+
+        $scope.msg="尚亚磊";
+
+
+    });
+
+    //根据abc值，值是true将元素显示，否则隐藏
+    app.directive('icktShow',function(){
+
+        return {
+            //定义指令类型
+            restrict: "A",
+            //this-->作用域指令对象
+            //参数1：jqlite
+            //参数2：attributes
+            //参数3：
+
+            compile:function(){
+//                console.log(this);
+//                console.log(arguments);
+                //返回值就是link函数
+                //作用域window  参数5个
+                return function(scope,jqlite,attrs){
+                    //可查看它的操作css的方法
+                    console.log(jqlite);
+                    //监听ickt-show属性
+                    scope.$watch(attrs.icktShow,function(value){
+                        //如果value的值为true显示
+                        //它是字符串转化为Boolean
+                        if(value){
+                           jqlite.css('display','block');
+                        }else{
+                            jqlite.css('display','none');
+                        }
+                    })
+
+                }
+            }
+
+        }
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

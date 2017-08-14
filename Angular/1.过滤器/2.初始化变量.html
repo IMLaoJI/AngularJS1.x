@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app ng-init="msg='hello';data='6月13日'">
+<!--
+    1.ng-init
+    在angular中，通过ng-init来初始化应用程序中的数据
+    ng-init指令对应的属性值就是我么要初始化的数据
+    定义方式和js中定义变量的方式一样
+    注意，多个变量之间使用分号;隔开，不能使用,逗号
+
+    ng-init定义的变量，定义在了全局作用域中了，所以能访问到
+
+
+    2.ng-bind
+    ng-bind:插值操作,为元素绑定一个内容值
+
+-->
+
+<div id="#app">
+    <label for="user">
+        <input id="user" type="text" ng-model="msg">
+    </label>
+    <p>{{msg}}</p>
+    <!--<h1>{{data}}</h1>-->
+    <h1 ng-bind="data"></h1>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+
+
+</script>
+</body>
+</html>

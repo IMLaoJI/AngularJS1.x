@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+   Date过滤器
+        是一个格式化时间的过滤器
+        中文的星期几是格式化不出来的
+   参数是格式化的模板
+   模板中的y表示年 M月  d日  E星期  h小时 (H表示24进制的)
+   m分钟  s表示秒
+
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <h1>{{date | date : 'fullDate'}}</h1>
+    <h1>{{date | date : 'EEEE, MMMM d,yyyy'}}</h1>
+    <h1>{{date | date : 'yyyy-MM-dd hh:mm:ss'}}</h1>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+        $scope.date = new Date();
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+
+    根作用域是$root
+
+    在作用域中查找数据是单向的，只能子作用域从父作用域中查找
+
+    Angular作用域是基于原型模式实现的
+
+    1.子作用域可以继承父作用域中的变量以及属性
+    (变量指定义在$scope上的变量)
+
+    2.父作用域无法使用子作用域的变量以及属性(继承是单向的)
+
+    3.子作用域一旦定义与父作用域相同的变量就会覆盖父作用域中的
+    变量，此时子作用域中如何展现不会受父作用域中的变量值影响
+
+    在子作用域中访问父作用域可以通过$parent属性访问
+
+    在某个作用域中访问的兄弟作用域
+        $$prevSibling 访问前一个兄弟作用域
+        $$nextSibling 访问后一个兄弟作用域
+    这几种情况是不建议使用的。因为会将作用域耦合在一起。
+    要使用观察者模式，在Angular中就是一个服务
+
+
+
+-->
+
+
+<h1>{msg}}</h1>
+
+
+<div class="main" ng-controller="parent">
+    <h2>{{msg}}</h2>
+    <div class="child" ng-controller="child">
+        <h3>{{msg}}</h3>
+    </div>
+</div>
+
+
+
+
+
+<script src="../lib/angular.js"></script>
+
+
+<script>
+
+    var msg="尚亚磊";
+
+    var app = angular.module('myApp',[]);
+
+
+    app.run(function($rootScope){
+        console.log($rootScope);
+        $rootScope.msg=msg;
+    });
+
+    app.controller('parent',function($scope){
+        console.log($scope);
+
+    });
+
+    app.controller('child',function($scope){
+        console.log($scope);
+    })
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+        }
+        .green{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        .w200{
+            width: 200px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+
+<!--
+    ng-switch可以控制多个页面的切换
+
+    on绑定一个控制变量
+
+    ng-switch-default设置默认页面
+
+    ng-switch-when 当满足when条件适合，渲染该页面
+
+    注意：无论你设置多少个ng-switch-when，
+    或者ng-switch-default
+
+    那么只能同时显示一个页面
+
+
+
+-->
+
+
+
+<div ng-controller="main">
+
+    //msg变量就是控制显示哪个页面的变量
+    <input type="text" ng-model="msg">
+
+    <div ng-switch on="msg">
+        <h1 ng-switch-default>第一个页面</h1>
+        <h1 ng-switch-when="second">第二个页面</h1>
+        <h1 ng-switch-when="third">第三个页面</h1>
+    </div>
+
+
+</div>
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    var app=angular.module('myApp',[]);
+
+    app.controller('main',function($scope){
+
+        //默认显示第二个页面
+
+        $scope.msg='second';
+
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    应用程序对象ng-app有个方法filter
+    这个方法就是用来定义过滤器的
+
+    参数1：过滤器名称
+    参数2：过滤器处理函数
+
+    它与vue的区别
+    vue的返回值直接渲染到页面中
+
+    angular过滤函数的返回值是一个函数
+    这个函数才是真正处理插值数据的函数
+    这个处理插值的函数，它的返回值才是渲染到页面中的数据
+
+    filter函数的作用域是空对象，参数没有参数
+
+    第一级函数：没有参数  作用域是一个空对象
+    在一生中只执行一次
+
+    第二级函数：作用域是window全局作用域
+    第一个参数是插值数据
+    第二个参数开始表示过滤器使用时候传递的参数，一一对应
+    在每一次绑定的时候，数据如果发生变化都会执行一次
+    返回值就是处理后要返回到页面中的数据
+
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <input type="text" ng-model="msg">
+
+        <h1>{{msg | toCamel}}</h1>
+
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    var app=angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+        //实现一个驼峰式命名过滤器，这个过滤器会根据
+        //传递的参数来决定首字母是否大写
+        //abc_dfg
+        //如果传递了一个true参数，此时的首字母大写
+
+        $scope.msg="hello";
+
+    });
+
+    app.filter('toCamel',function(){
+
+        return function(data){
+            return data.replace(/\_(\w)/g,function(match,$1){
+                return $1.toUpperCase();
+            });
+
+        }
+
+    })
+
+
+
+</script>
+</body>
+</html>

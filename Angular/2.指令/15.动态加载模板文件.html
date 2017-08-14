@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    ng-include  动态加载模板
+
+    原理是通过异步请求实现，所以要创建一个服务器
+
+    它的值是文件路径后字符串
+
+-->
+
+
+<!-- 将tpl.html链入到这个div中 -->
+<!--<div ng-controller="myCtrl" ng-include="'tpl.html'">-->
+<!--<div ng-controller="myCtrl" ng-include="'tpl'">-->
+<!--</div>-->
+
+<div ng-controller="myCtrl" ng-include="tpl"></div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app=angular.module('myApp',[]);
+    app.controller('myCtrl',function($Scope){
+        $scope.msg='second';
+        $scope.tpl='tpl.html';
+    })
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

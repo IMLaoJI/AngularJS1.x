@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+$timeout 服务
+    定时器服务，延迟一段执行业务
+    服务的使用，在哪个函数中使用服务，直接将该服务注入到函数中
+
+    注意它与setTimeout的区别
+
+    $digest() 检测作用域
+    $apply() 是对$digest()方法的封装，也是检测数据
+    $apply(function(){})，既可以检测回调函数内的变量检测，又可以对它前面的前面声明的变量检测
+
+
+-->
+
+
+<div>
+
+    <h1>{{a}}</h1>
+
+<h1>{{time}}</h1>
+    <h1>{{age}}</h1>
+
+</div>
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    //隔一秒之后显示时间
+    //run方法只能在跟作用于中执行
+    //使用setTimeout显示不出来效果，这种情况称为作用域丢失
+    //解决办法使用$timeout服务
+
+    angular.module('myApp',[])
+        .run(function($rootScope,$timeout){
+            //作用域丢失的情况
+            /*setTimeout(function(){
+                $rootScope.time='尚亚磊';
+            },1000);*/
+            //第一种解决办法：
+           /* $timeout(function(){
+                $rootScope.time='尚亚磊';
+            },1000);*/
+
+            //第二种解决方式：使用$digest()方法
+            //它的作用是做一个作用域中变量的检测
+            //并且他只能检测到写在它前面声明的变量
+
+            /*setTimeout(function(){
+                $rootScope.time='尚亚磊';
+                $rootScope.$digest();
+                $rootScope.age=30;
+            },1000);*/
+
+            //第三种解决方式 $apply();
+            /*setTimeout(function(){
+                $rootScope.time='尚亚磊';
+                $rootScope.$apply();//这个其实就是$digest()方法的封装，也看不到写在它后面的变量
+                $rootScope.age=30;
+            },1000);*/
+
+
+            //第四种解决方法，$apply传递一个回调函数
+            setTimeout(function(){
+                $rootScope.a=123;
+                $rootScope.$apply(function(){
+                    $rootScope.time='尚亚磊';
+                    $rootScope.age=30;
+                });
+            },1000);
+        })
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

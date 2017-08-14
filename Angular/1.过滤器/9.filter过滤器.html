@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    filter接收的参数三中方式
+    1.传递一个字符串，表示顾虑的字段
+    2.传递一个变量，这个变量在作用域中定义的字段
+    3.传递以一个函数，当每一次执行过滤的时候，会执行该函数
+    函数的返回值就是过滤的条件,它的作用域是全局作用域
+    它有三个参数  1.遍历数组成员值  2.成员索引值  3.参数是原数组
+
+
+
+    在过滤器中传递参数的时候，在参数的前面一定要一个冒号
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <!-- 找出带e的 -->
+    <div>{{colors | filter : 'e'}}</div>
+    <!-- 带有O的 -->
+    <div>{{colors | filter : key}}</div>
+    <!-- 首字母是大写的 -->
+    <div>{{colors | filter : firstCharIsUpper}}</div>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+
+        $scope.colors=['red','Green','bluE','Yellow','orange','white','black'];
+        $scope.key='o';
+
+        $scope.firstCharIsUpper=function(value,index,arr){
+            //console.log(this);
+            //console.log(arguments);
+
+            //return value[0]===value[0].toUpperCase();
+
+            return value[value.length-1]===value[value.length-1].toUpperCase();
+        }
+
+
+    });
+
+
+</script>
+</body>
+</html>

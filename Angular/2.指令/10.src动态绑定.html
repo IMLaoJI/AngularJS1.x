@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    ng-src动态创建img的src属性
+
+    它对于体验的提过是有价值的
+
+    ng-src的属性值也必须要使用{{}}
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <img ng-src="{{src}}" alt="">
+
+</div>
+
+
+
+
+<script src="../lib/angular.js"></script>
+
+<script>
+    var app=angular.module('myApp',[]);
+
+    app.controller('myCtrl',function($scope,$timeout){
+
+        $timeout(function(){
+            $scope.src='bg.jpg';
+        },3000);
+
+
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

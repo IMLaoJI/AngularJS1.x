@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    orderBy排序过滤器
+    参数1：排序的字段
+    参数2：正序还是倒序  true 倒序  false正序
+    如果是数字，按照数字大小排序
+    如果是字符串，按照字符所在编码进行排序
+
+-->
+
+<div ng-controller="myCtrl">
+
+    <!-- 排序 -->
+    <h1>{{people |orderBy: 'age' : true }}</h1>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+       $scope.people=[
+           {
+               name:'John',phone:555-1212,age:10
+           },
+           {
+               name:'Mary',phone:555-9876,age:19
+           },
+           {
+               name:'Mike',phone:555-4321,age:21
+           },
+           {
+               name:'Adam',phone:555-5678,age:35
+           },
+           {
+               name:'Julie',phone:555-8765,age:29
+           }
+       ]
+
+    });
+
+
+</script>
+</body>
+</html>

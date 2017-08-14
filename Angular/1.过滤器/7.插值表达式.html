@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+    <div>{{'面积'+width * height}}</div>
+
+    <h1>{{message.toUpperCase()}}</h1>
+
+
+</div>
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    angular.module('myApp',[]).
+        controller('myCtrl',function($scope){
+            $scope.width=100;
+            $scope.height=100;
+            $scope.message='hello student';
+    })
+
+
+</script>
+</body>
+</html>

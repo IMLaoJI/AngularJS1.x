@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令路由</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+路由：
+    路由大致分为两种：
+        一类是指令路由，依赖的代码库：angular-route
+        一类是ui路由，依赖的代码库 angular-ui-router
+
+    指令路由是对angular的ng指令扩展
+    ui路由是对angular的ui指令的扩展
+
+    使用UI路由第一步要移入angular-route
+
+    在页面中通过ng-view指令定义路由视图容器
+    在config定义路由信息
+
+    Config方法是在app启动之前执行的方法
+
+-->
+
+
+    <header>导航模块</header>
+    <!-- 渲染的视图模块 -->
+    <div ng-view>内容模块</div>
+
+
+<script src="../lib/angular.js"></script>
+<script src="../lib/angular-route.min.js"></script>
+<script>
+
+   var app = angular.module('myApp',['ngRoute']);
+
+//   console.log(app);
+
+   //通常会为每一个路由定义一个控制器，即建立一个作用域
+
+   //在config中定义路由，需要$routeProvider
+    app.config(function($routeProvider){
+        //使用$routeProvider的when方法来配置
+        //when方法的参数有两个，第一个是路径，第二个是模板
+        $routeProvider.when('/',{
+            template:'<h1>{{msg}}</h1>',
+            controller:function($scope){
+                $scope.msg='哈哈';
+            }
+        }).when('/abc',{
+            template:'我去'
+        })
+    })
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

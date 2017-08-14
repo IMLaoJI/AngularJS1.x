@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+    自定义指令
+        是angular中很重要的一部分
+        指令?
+        指令在angular中表示对dom元素功能的拓展
+        我们学习内置的指令就是学习angular对dom元素拓展新功能，我们学习自定义指令就是要学会自己为dom
+        元素拓展自己需要的功能
+        在angular创建自定义指令需要directive方法，这个方法跟filter方法一样
+        Filter是在应用程序app上调用的，directive方法也是应用程序app上调用的，通过filter一样，使用自定义
+        指令分两步：
+        1.是在页面中添加dom，在页面中使用
+        2.在js中自定义指令，通过directive方法
+
+        参数1：自定义指令的名称
+        (在页面中使用-分隔单词，在自定义中通过驼峰命名法)
+        参数2：自定义指令处理函数
+        返回值是一个对象，用来描述我们的自定义指令
+
+        描述自定义指令的对象有一些属性
+
+        restrict  表示自定义指令的类型
+
+        四大类 ECMA
+        E  元素自定义元素类型的自定义指令
+        C  class类型的自定义指令
+        M  注释指令(应用很少)
+        A  元素属性类型自定义指令
+
+        template表示自定义指令模板
+
+        replace表示是否替换该元素 dom元素是否删除
+
+-->
+
+<div>
+
+    <!-- 为div添加title内容 -->
+    <!-- 自定义类型 -->
+    <div my-title></div>
+    <!-- 元素类型 -->
+    <my-title></my-title>
+    <!-- class类型 -->
+    <div class="my-title"></div>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]);
+
+    //定义指令
+
+    app.directive('myTitle',function(){
+        //返回值是描述自定义指令的
+        return {
+            //表示指令类型
+            restrict:'AEC',
+            //模板指令
+            template:'<h1>今天是9月12日</h1>'
+        }
+    })
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

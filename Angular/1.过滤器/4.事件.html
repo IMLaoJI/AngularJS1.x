@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    在angular中每一件事件相当于一个指令，以ng开头
+    ng-click="fn()";默认一定要加上括号
+
+    在angular中事件回调函数定义在作用域中
+
+    在angular中传入事件对象跟vue一样都是$event
+
+    在angular中事件回到函数中的作用域就是控制器作用域
+
+    在angular中在事件回调函数内部设置作用域中的数据有
+    两种方式
+    1.通过this设置
+    2.通过$scope设置
+
+-->
+
+<div class="main" ng-controller="myCtrl">
+    <button ng-click="choose(color[0])">{{color[0]}}</button>
+    <button ng-click="choose(color[1])">{{color[1]}}</button>
+    <button ng-click="choose(color[2])">{{color[2]}}</button>
+    <p>选中的颜色{{chooseColor}}</p>
+</div>
+
+
+
+
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    angular.module('myApp',[]).
+        controller('myCtrl',function($scope){
+            $scope.color=['red','green','blue'];
+            $scope.chooseColor="";
+            $scope.choose=function (e) {
+                //console.log(this);//指向作用域
+                //console.log(arguments);
+                //console.log($scope)
+//                this.chooseColor='red';
+//                $scope.chooseColor='green';
+                //如果传递的参数是一个事件对象
+//                this.chooseColor=e.target.innerHTML;
+                //如果参数是一个字符串
+                this.chooseColor=e;
+            }
+    });
+
+
+
+</script>
+
+
+</body>
+</html>

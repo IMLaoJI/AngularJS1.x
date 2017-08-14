@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    1.ng-show是否显隐元素
+        true显示元素
+        false隐藏元素
+    2.ng-hide 是否显隐元素
+        true隐藏元素
+        false显示元素
+
+
+-->
+
+<div ng-controller="myCtrl">
+    <button ng-click="togglePage(true)">商品详情</button>
+    <button ng-click="togglePage(false)">用户评价</button>
+    <div ng-show="showFirst" ng-bind="'商品详情页'"></div>
+    <div ng-hide="showFirst" ng-bind="'用户评价'"></div>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+        controller('myCtrl',function($scope){
+            $scope.showFirst=false;
+            $scope.togglePage=function (isShowFirst) {
+                $scope.showFirst=isShowFirst;
+            }
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app>
+
+<!--
+
+ng-app;angular.module("ngApp",[]);
+这是一个模块，一个AngularJS应用只有一个ng-app
+
+
+1.视图模型:作用域$scope
+2.通过定义ng-app启动一个应用程序,同时创建一个全局作用域
+流程:
+    1.页面加载完毕
+    2.angular开始对页面进行处理,寻找ng-app指令
+    3.找到确认app容器元素了
+    4.此时开始对该容器内部的元素进行处理
+    5.遍历所有元素查找ng指令，发现有angular指令，则启动指令的的功能
+    6.发现{{}}，angular会在作用域中查找该变量，然后插入
+    7.遍历完成，将angular应用程序启动
+
+    ng-model="msg" "msg":这个msg表示的是变量  "'msg'":这个msg表示的是字符串
+
+
+    Angular的四大特性    一切都是从模块开始
+    1.MVC  Model(数据模型)  Controller(业务逻辑/控制逻辑)  View(视图)
+    2.模块化  angular.module(); 相当于C语言中的main方法
+    3.指令系统  <hello></hello>  指令的本质就是标签库
+    4.双向数据绑定  针对标签 ng-model  {{}} 双花括号的意思是取值
+
+    MVC：作为DataModel的$scope
+    依赖注入：
+    模块化：Module
+    Service
+    Filter
+
+
+    @为什么需要MVC？
+
+    代码规模越来越大，切分职责是大势所趋
+    为了复用：很多逻辑是一样的
+    为了后期维护方便：修改一块功能不影响其他功能
+    MVC只是手段，终极目标是模块化和复用
+
+    @前端的MVC困难在哪里？
+
+    浏览器加载脚本---加载完成之后JIT编译执行
+    操作DOM的代码必须等待整个页面全部加加载完成
+    多个JS文件之间出现互相依赖，程序员必须自己解决
+    JS原型继承也给全段编程带来了很多困难
+
+
+
+    @AngularJS语境下的MVC是如何实现的？
+
+    ng-controller来运行我们的控制器函数
+    1.不要试图去复用Controller,一个控制器一般只负责一小块试图
+    2.不要在Controller操作DOM，这不是控制器的职责
+    3.不要在Controller里面做数据格式，ng有很好用的表单控件
+    4.不要在Controller里面做数据过滤操作，ng有$filter服务
+    5.一般来说，Controller是不会相互调用的，控制器之间的交互会通过事件进行
+
+
+
+    好处：职责清晰，代码模块化
+
+    directive
+    Angular操作DOM的事情通过封装为指令来处理
+
+    AngularJS中的MVC是借助于$scope实现的!!!
+
+    $scope作用域和JS中的作用域是一样的
+    1.它是一个普通的JS对象
+    2.它提供了一些工具方法$watch()/$apply(),一般不需要我们去调用
+    3.$scope是表达式的执行环境或则叫作用域
+    4.$scope是一个树形结构，与DOM标签平行
+    5.$scope对象会继承父$scope(作用域)上的属性和方法的
+    6.每一个Angular应用只有一个根$scope对象(一般位于ng-app上)
+    7.$scope是可以传播时间，类上DOM时间，可以向上也可以向下
+    8.$scope不仅是MVC的基础，也是后面实现双向数据绑定的基础
+    9.可以通过angular.element($0).scope()进行调试
+
+    $scope的声明周期：创建--注册监控--模型的变化--观察模型有没有脏--根据判断来确定是清空
+
+
+    @模块的定义：
+    在angular中使用module()方法来定义模块实现模块化
+    那么什么是模块呢？
+    给出的定义是有模型视图控制器，形成的一个功能模块就叫模块
+
+
+    路由：使用ngRoute进行视图之间的路由
+    通过URL来实现，视图通过控制器生成#表示内部的锚点
+    是不会像服务器端发起请求的，表示在页面内进行跳转
+
+    ng官方推荐的模块切分方式
+    以app.js为入口点
+    包含controllers.js directives.js
+    services routes filters
+
+    任何一个ng应用都是有控制器、指令、服务、路由、过滤器等有限的模块类型构成的
+
+    控制器、指令、服务、路由、过滤器分被放在一个模块里面(可借助与grunt合并)
+
+    用一个总的APP模块作为入口点，它依赖其它所有模块
+
+    模块之间的依赖是怎么做的？
+    通过angular中的依赖注入的机制来做的，写的虽然是字符串
+    但是它通过依赖注入的机制来解决
+
+    以ng为开头的为angular的模块
+
+
+    前端路由的基本原理
+    1.哈希#
+    2.HTML5中新的history API
+    3.路由的核心是给应用定义“状态”
+    4.使用路由机制会影响到应用的整体编码方式
+    5.考虑兼容性问题与“优雅降级”
+
+
+    指令      compile与link
+
+    指令分为
+    加载阶段 -- 加载angular.js,找到ng-app指令确认应用的边界
+    编译阶段 -- 遍历DOM，找到所有指令
+        根据指令代码中的template,replace,transclue转换DOM结构
+        如果存在compile函数则调用  一般不会写
+
+    链接阶段 --  对每一条指令运行link函数
+                link函数一般用来操作DOM、绑定事件监听器
+
+    compile函数用来对模板自身进行转换
+    而link函数负责在模型和视图之间进行动态关联
+
+    作用域在链接阶段才会被绑定到编译之后的link函数上
+
+    compile函数仅仅在编译阶段运行一次，而对于指令的每个实例
+    link函数都会执行一次
+
+    compile可以返回preLink和postLink函数
+    而link函数只会返回postLink函数
+
+    如果要修改DOM结构，应该在postLink中来做这件事情
+    而如果在preLink中做这件事情会导致错误
+
+    大多数时候我们只要编写link函数即可
+
+
+
+
+
+
+-->
+<div id="#app">
+    <label for="user">
+        <input id="user" type="text" ng-model="msg">
+    </label>
+    <p>{{msg}}</p>
+</div>
+
+<script src="../lib/angular.js"></script>
+
+
+
+
+
+
+</body>
+</html>

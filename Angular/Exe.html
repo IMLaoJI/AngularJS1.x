@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="main">
+
+    <div repeat-num="3">珠峰培训</div>
+
+</div>
+
+
+
+<script src="lib/angular.js"></script>
+<script src="lib/angular-route.min.js"></script>
+<script>
+
+   var app = angular.module('myApp',[]);
+   app.controller('main',function($scope){
+      $scope.msg='hello';
+   });
+   app.directive('repeatNum',function(){
+       return{
+           restrict:'AEC',
+           link:function(scope,jqlite,attrs){
+               var num = attrs.repeatNum;
+               var dom = jqlite[0];
+               for(var i=0;i<num;i++){
+                   var res = jqlite.clone();
+                   jqlite.after(res);
+               }
+           }
+       }
+   })
+
+
+
+
+
+</script>
+</body>
+</html>

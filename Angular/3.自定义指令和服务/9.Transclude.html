@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+Transclude
+    作用：是将自定义元素中的未知内容，插入到模板中
+    这个指令要有模板配合
+    它支持的模板有两种：内部模板和外部模板
+    内部模板通过 template定义
+    外部的模板通过 template url来定义
+
+    模板会告知我们这些位置的内容会放在哪里 这个元素就要有
+    ng-transclude指令
+    必须设置transclude属性，并且属性值必须是true
+
+
+-->
+
+<div ng-controller="main">
+
+    <my-time><h1>北京时间</h1></my-time>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]).controller('main',function($scope){
+
+
+
+    });
+
+    //根据abc值，值是true将元素显示，否则隐藏
+    app.directive('myTime',function($compile){
+
+        return {
+
+            //表示指令类型
+            restrict:'AEC',
+            transclude:true,
+            templateUrl:'time.html',
+//            template:"<h1> {{time}} </h1>",
+            controller:function($scope){
+                //定义time变量
+                var date = new Date();
+                $scope.time=date.getHours()+':'+date.getMinutes()+":"+date.getSeconds();
+
+            }
+
+        }
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+
+-->
+
+<div ng-controller="main">
+
+    <input type="text" ng-model="msg">
+    <!-- 实现ng-bind指令的功能 -->
+    <h1 ickt-bind="msg"></h1>
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]).controller('main',function($scope){
+
+        $scope.msg="尚亚磊";
+
+
+    });
+
+    app.directive('icktBind',function(){
+
+        return {
+            //定义指令类型
+            restrict:"A",
+            scope:{
+                msg:'=icktBind'
+            },
+
+            link:function(scope,jqlite,attrs){
+
+                //获取父元素中的数据
+                console.log(scope.msg);
+
+                //将msg放在放在元素内容里
+
+                //监听icktBind属性值的变化
+                scope.$watch(attrs.icktBind,function(newValue,oldValue,scope){
+
+//                    jqlite.html(scope.msg);
+                      jqlite.html(newValue);
+
+                });
+
+            }
+
+        }
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

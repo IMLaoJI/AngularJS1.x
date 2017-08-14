@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+
+-->
+
+<div ng-controller="main">
+    <!-- 根据repeat-num的值来决定渲染div几次 -->
+    <div repeat-num="3">珠峰培训</div>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]);
+
+    var result=app.controller('main',function($scope){
+        $scope.msg='hello';
+    });
+
+    app.directive('repeatNum',function(){
+
+        return {
+            //定义指令类型
+            restrict:"A",
+
+            //定义link方法实现重复渲染的功能
+            //this是window
+            //它的参数有5个
+            //参数1：Scope 表示指令的作用域--父作用域
+            //参数2：jQLite对象  指令元素
+            //参数3：Attributes 指令元素的属性对象
+            link:function(scope,jqlite,attrs){
+                //根据attrs中的repeatNum的值将div渲染repeatNum次
+                //第一步获取num值
+                var num = attrs.repeatNum;
+                //第二步获取指令元素
+                var dom = jqlite[0];
+                console.log(dom);
+
+                //第三步渲染这些元素(在指令元素的后面)
+                for(var i=0;i<num;i++){
+                  var res= jqlite.clone();
+                  jqlite.after(res);
+                }
+            }
+        }
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

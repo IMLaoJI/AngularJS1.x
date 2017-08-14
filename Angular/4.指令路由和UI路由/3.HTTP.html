@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <h1>{{name}}</h1>
+
+</div>
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    angular.module('myApp',[])
+        .controller('myCtrl',function ($scope,$http) {
+
+           $http({
+               url:'data.json',
+               method:'GET',
+               //get请求的url参数
+               prams:{
+                   id:10,
+                   query:'world'
+               }
+           }).success(function(res){
+               console.log(res);
+               //将data中的数据渲染到页面中
+               $scope.name=res.name;
+           })
+
+    });
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

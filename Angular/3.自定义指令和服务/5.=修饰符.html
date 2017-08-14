@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+    当自定义指令，隔离作用域后，就不能使用父级作用域里的数据了，如果想使用可以通过属性传递的方式来实现
+    =修饰符
+        实现父级作用域向子级作用域传递数据的方式之一
+        第一步：在自定义指令的元素上使用一个普通的自定义属性，其值没有插值符号，根据这个值做一个变量映射
+        第二步：在scope属性中，使用=将自定义指令作用域中的变量和父级作用域中的变量简历双向绑定
+        特点：
+            1.此时，在自定义指令的作用域中的数据与父作用域中的数据是双向绑定的，因此它是双向的
+            2.自定义指令作用域指令中的初始化数据会覆盖父作用域中的数据变量
+
+-->
+
+<div ng-controller="main">
+    <input type="text" ng-model="msg">
+    <h1>{{msg}}</h1>
+    <!-- 定义showMsg指令    作用：让msg数据在指令中显示 -->
+    <p msg-data="msg" show-msg>珠峰培训 <span>{{msg}}</span>{{name}}</p>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]);
+
+    var result=app.controller('main',function($scope){
+        $scope.msg='hello';
+
+
+    });
+
+    //控制器函数的返回值：它的返回值是app这个对象
+    //    console.log(result===app);
+    //    console.log(app);
+    //    console.log(result);
+
+
+    //创建showMsg指令  showMsg的作用域是window  参数是空 生命周期只执行一次
+    app.directive('showMsg',function(){
+//        console.log(this);
+//        console.log(arguments);
+
+
+        return {
+            //定义指令类型
+            restrict:"A",
+
+            //向自定义指令中写入内容，自定义模板 它回到自己的作用域中查找数据
+            template:"<h2>{{name}} | {{msg}}</h2>",
+
+            //通过controller定义控制器，来创建作用域 参数$scope作用域 创建作用域的目的就是为了让它向上发生作用域查找，默认会使用父作用域中的数据
+            // $element自定义指令元素 获取页面中的元素，如果没有jQuery 它获取的是一个jqlite对象
+            // $attrs使用自定义指令元素身上的属性集合 也就是说，根据自定义元素身上的属性创建一个对象，它只包含使用自定义指令的元素，其子元素不包含
+            controller:function($scope,$element,$attrs){
+
+                //将属性中的msgData赋值给自定义指令中的msg,也就是获取到父级作用域中的数据
+
+                console.log(this);
+                console.log(arguments);
+                $element.css('color','red');
+                //通过$scope，为自定义指令创建数据,结果表明它使用和父级作用域是通过一作用域
+                $scope.msg="尚亚磊";
+                $scope.name='LOGO';
+
+            },
+            //在angular中叫隔离作用域
+            //这个属性是为了把自定义指令的作用域和父级作用域的分开变成一个完全独立的作用域，并且不发生向上的作用域查找  它的默认值是false
+            //值是{}和true是一样的
+            scope:{
+                msg:'=msgData'
+
+            }
+
+        }
+
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

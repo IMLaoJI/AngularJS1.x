@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    ng-href动态创建a的href属性
+
+    当没有数据的时候当做普通元素显示，有数据的时候当做a元素显示
+
+    ng-href属性值必须要使用{{}}
+
+-->
+
+
+
+<div ng-controller="main">
+
+    <a ng-href="{{baidu}}">百度</a>
+
+</div>
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    var app=angular.module('myApp',[]);
+
+    app.controller('main',function($scope,$timeout){
+
+
+        $timeout(function () {
+            $scope.baidu='http://www.baidu.com';
+
+        },3000);
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

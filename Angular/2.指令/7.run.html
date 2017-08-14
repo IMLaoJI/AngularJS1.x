@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+
+   run()方法:应用程序启动起来的时候会调用该方法，
+   这个方法会在根作用域上执行
+   这个方法是app对象上的方法
+
+   run方法的作用域是全局作用域window  默认参数空
+
+   我们在该方法中想使用根作用域，需要把根作用域注入进来
+
+
+-->
+
+
+    <div>{{msg}}</div>
+
+
+
+
+
+
+<script src="../lib/angular.js"></script>
+
+
+<script>
+
+    var msg="尚亚磊";
+
+    var app = angular.module('myApp',[]);
+
+    //关于根作用域的可以在run方法中使用
+    app.run(function($rootScope){
+        console.log(this);
+        console.log(arguments);
+        console.log(this.msg);
+        console.log($rootScope);
+        $rootScope.msg=msg;
+    })
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

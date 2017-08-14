@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+        }
+        .green{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        .w200{
+            width: 200px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+
+<!--
+
+    类绑定ng-class
+        在angular中绑定类大致三中情况
+            第一种传递一个对象
+                对象的属性名就是类名称
+                对象的属性值是一个布尔值 true保留这个类
+                false删除这个类
+            第二种  传递一个变量
+                变量的值就是类的名称
+
+            第三中  传递一个数组
+
+            数组的每个成员表示一个类的名称
+
+            无论是变量还是数组中的成员，都可以用使用字符串注意要加引号
+
+
+-->
+
+
+
+<div ng-controller="main">
+
+    <button ng-click="getX()">投色子</button>
+
+    <div ng-class="{red: x >3,green:x <= 3}">{{x}}</div>
+
+    <div ng-class="mydiv"></div>
+
+    <div ng-class="[firstCls,secondCls]">div3</div>
+
+</div>
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    var app=angular.module('myApp',[]);
+
+    app.controller('main',function($scope){
+
+        $scope.getX=function(){
+            $scope.x=parseInt(Math.random()*6+1)
+        };
+        //通过变量绑定以一个类
+        $scope.mydiv='red';
+
+        $scope.firstCls='green';
+        $scope.secondCls='w200';
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

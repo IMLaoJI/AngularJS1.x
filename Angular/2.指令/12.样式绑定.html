@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            width: 100px;
+            height: 100px;
+            background-color:red;
+        }
+        .green{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        .w200{
+            width: 200px;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+
+<!--
+    样式的绑定：
+        绑定样式只要两种
+            第一种方式：传递一个对象
+            对象的属性名称表示样式的属性名称
+            对象的属性值表示样式的属性值
+            第二种方式传递一个变量
+            这个变量是一个对象
+            同上
+-->
+
+
+
+<div ng-controller="main">
+
+
+    <div ng-class="green" ng-style="{width:100*x+'px'}"></div>
+
+</div>
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    var app=angular.module('myApp',[]);
+
+    app.controller('main',function($scope){
+
+
+
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+脏值检测
+    就是对表单验证
+    表单事件：focus blur keydown keyup change click
+
+    在angular中做表单验证只需要增加几个指令即可
+    这一块比vue强大的多
+
+
+    在创建表单的时候，angular会根据表单(form input等等)标签的name属性在作用域中创建一个变量
+    Input表单的name属性定义在form元素name属性对象的变量内部
+
+    在作用域中第一次是根据form标签寻找name属性并映射变量(第一次不会根据input等标签作变量映射)
+    第二次会在form元素中遍历表单元素并映射到表单变量中
+
+
+    不论是表单input元素还是form元素对应的变量都有四个属性
+
+    $dirty:是否被修改
+        true 已被修改过
+        false 没有被修改过
+
+    $pristine是否被修改过
+        true 没有被修改过
+        false 已经被修改过
+
+
+    $valid 是否合法
+        true 合法
+        false不合法
+
+    $invalid是否合法
+        true不合法
+        false合法
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <form name="myform" action="">
+        <label for="user">
+         用户名   <input  type="text" id="user" name="username" ng-model="uname" required>
+        </label>
+        <span ng-show="myform.username.$invalid && myform.username.$dirty">用户名必填</span>
+        <div>
+            <button ng-click="check()">提交</button>
+        </div>
+    </form>
+
+</div>
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    angular.module('myApp',[]).
+        controller('myCtrl',function($scope){
+            $scope.check=function(){
+                console.log($scope);
+
+            }
+    });
+
+
+</script>
+</body>
+</html>

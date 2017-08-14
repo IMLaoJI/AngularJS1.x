@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+Require    为自定义指令添加依赖指令的，它的值是一个数组
+    如果依赖指令只有一个，我们可以不用数组，直接书写
+    此时link方法中的第四个参数就是该指令的控制器
+    为自定义指令添加依赖指令的，它的值是一个数组
+    我们可以将多个指令传递进来
+    当添加这个属性的时候
+    link函数会增加一个参数来表示它
+
+
+
+-->
+
+<div ng-controller="main">
+
+    <input type="text" ng-model="abc" my-deal="请正确输入文案">
+
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    var app = angular.module('myApp',[]).controller('main',function($scope){
+        $scope.abc="尚亚磊";
+    });
+
+    //当指令不合法的时候，我们在表单元素的后面添加一个提示框
+    //将表单元素边框变成红色
+    app.directive('myDeal',function($compile){
+
+        return {
+            //表示指令类型
+            restrict:'AEC',
+            require:['ngModel'],
+            link:function(scope,jqlite,attrs,ctrls){
+                //创建一个span元素
+                var span =document.createElement('span');
+                //将my-deal内容值渲染到span中
+                span.innerHTML=attrs.myDeal;
+                var hasAdd=false;
+
+                //监听ng-mode的值
+                scope.$watch(attrs.ngModel,function(){
+                    //判断ng-Mode指令是否合法
+                    if(ctrls.$valid){
+                        //将input元素的边框变红，并在它后面添加一个span
+
+                        jqlite.css('borderColor','red');
+                        if(hasAdd){
+
+                            jqlite.after(span);
+                            hasAdd=true;
+                        }else{
+                            span.css('display','block');
+                        }
+                    }else{
+                        //将input元素边框变成黑色
+                        jqlite.css('borderColor','black');
+                        //将input元素后面的span隐藏
+                        span.css('display','none');
+
+                    }
+
+                })
+            }
+        }
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

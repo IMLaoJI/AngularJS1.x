@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+
+   提交表单时触发的事件
+
+
+-->
+
+<div ng-controller="myCtrl">
+
+    <form action="" name="myForm" ng-submit="formSubmit($event)">
+        <label >
+            用户名：<input type="text"  ng-model="msg">
+        </label>
+        <button type="submit">提交</button>
+    </form>
+
+</div>
+
+
+
+
+
+<script src="../lib/angular.js"></script>
+
+
+<script>
+
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',function($scope){
+        $scope.formSubmit=function(){
+            console.log(this);
+            console.log(arguments);
+            console.log($scope);
+        }
+
+    })
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+
+<!--
+    1.ng-show是否显隐元素
+        true显示元素
+        false隐藏元素
+    2.ng-hide 是否显隐元素
+        true隐藏元素
+        false显示元素
+
+
+-->
+
+<div ng-controller="myCtrl">
+    <button ng-click="togglePage('first')">商品详情</button>
+    <button ng-click="togglePage('second')">用户评价</button>
+    <button ng-click="togglePage('third')">第三个页面</button>
+    <div ng-show="pages.first" ng-bind="'商品详情页'"></div>
+    <div ng-show="pages.second" ng-bind="'用户评价'"></div>
+    <div ng-show="pages.third" ng-bind="'第三个页面'"></div>
+</div>
+
+
+<script src="../lib/angular.js"></script>
+<script>
+    angular.module('myApp',[]).
+    controller('myCtrl',function($scope){
+        $scope.pages={
+            first:true,
+            second:false,
+            third:false
+        };
+        $scope.togglePage=function (whitch) {
+            for(var key in $scope.pages){
+                $scope.pages[key]=false;
+            }
+            $scope.pages[whitch]=true;
+        }
+    });
+
+
+</script>
+</body>
+</html>

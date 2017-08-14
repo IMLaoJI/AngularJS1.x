@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="myApp">
+<!--
+
+
+-->
+
+
+<div ng-controller="myCtrl">
+
+    <h1>{{name}}</h1>
+
+</div>
+
+
+
+<script src="../lib/angular.js"></script>
+<script>
+
+    angular.module('myApp',[])
+        .controller('myCtrl',function ($scope,$http) {
+
+            $http.get('data.json',{
+                params:{
+                    id:20
+                }
+            }).success(function (res) {
+                console.log(res);
+                $scope.name=res.name;
+                console.log(this);
+                console.log(arguments);
+            })
+
+        });
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
